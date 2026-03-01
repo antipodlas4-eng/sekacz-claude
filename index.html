@@ -121,6 +121,15 @@
     content: '↓'; display: block; text-align: center; font-size: 1.2rem; margin-top: 4px;
   }
 
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
@@ -769,6 +778,99 @@
   </div>
 </section>
 
+<!-- WELCOME POPUP -->
+<div id="welcome-overlay" style="
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(44,26,18,0.75);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.5s ease;
+">
+  <div id="welcome-modal" style="
+    background: var(--cream);
+    max-width: 520px; width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(44,26,18,0.4);
+    position: relative;
+    animation: slideUp 0.5s ease;
+  ">
+    <!-- Top bar -->
+    <div style="background: linear-gradient(135deg, var(--dark), var(--brown)); padding: 36px 40px 28px; text-align: center; position:relative;">
+      <div style="font-size:2.8rem; margin-bottom:10px;">🎂</div>
+      <p style="font-size:0.7rem; letter-spacing:4px; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:8px;">Witaj w</p>
+      <h2 style="font-family:'Playfair Display',serif; font-size:2rem; color:#fff; line-height:1.2; margin-bottom:8px;">Cukierni Sękacz</h2>
+      <p style="color:rgba(255,255,255,0.65); font-size:0.9rem; line-height:1.6; font-weight:300;">Tradycyjne wyroby cukiernicze z Warszawy.<br>Dołącz do naszej społeczności!</p>
+    </div>
+
+    <!-- Content -->
+    <div style="padding: 32px 40px 36px;">
+
+      <!-- Newsletter -->
+      <div style="margin-bottom:24px;">
+        <h3 style="font-family:'Playfair Display',serif; color:var(--brown); font-size:1.1rem; margin-bottom:6px;">📧 Newsletter ze słodkościami</h3>
+        <p style="font-size:0.85rem; color:var(--light-text); margin-bottom:14px; line-height:1.6;">Bądź pierwsza/y – informacje o nowych produktach, promocjach i sezonowych smakołykach prosto na Twój e-mail.</p>
+        <div id="newsletter-success" style="display:none; background:#f0faf0; border:1px solid #4caf50; border-radius:4px; padding:12px; text-align:center; color:#2e7d32; font-weight:700; font-size:0.85rem;">
+          ✅ Dziękujemy za zapis!
+        </div>
+        <form action="https://onrender.us17.list-manage.com/subscribe/post?u=6ab42276156f325e195a884d8&amp;id=afb8cc0076&amp;f_id=00d0b4e0f0" method="post" id="newsletter-form" target="_blank" style="display:flex; gap:8px;">
+          <input type="email" name="EMAIL" id="newsletter-email" placeholder="Twój adres e-mail" required style="
+            flex:1; padding:11px 14px;
+            border:1.5px solid rgba(200,134,78,0.3);
+            border-radius:3px; font-family:'Lato',sans-serif;
+            font-size:0.9rem; background:#fff; color:var(--text);
+            outline:none; transition:border-color 0.3s;
+          " onfocus="this.style.borderColor='var(--caramel)'" onblur="this.style.borderColor='rgba(200,134,78,0.3)'">
+          <!-- Mailchimp bot protection -->
+          <div aria-hidden="true" style="position:absolute;left:-5000px;">
+            <input type="text" name="b_6ab42276156f325e195a884d8_afb8cc0076" tabindex="-1" value="">
+          </div>
+          <button type="submit" name="subscribe" style="
+            background:var(--caramel); color:#fff;
+            border:none; padding:11px 20px;
+            border-radius:3px; font-family:'Lato',sans-serif;
+            font-size:0.8rem; font-weight:700; letter-spacing:1px;
+            text-transform:uppercase; cursor:pointer;
+            transition:background 0.3s; white-space:nowrap;
+          " onmouseover="this.style.background='var(--brown)'" onmouseout="this.style.background='var(--caramel)'">Zapisz się</button>
+        </form>
+      </div>
+
+      <!-- Divider -->
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:24px;">
+        <div style="flex:1; height:1px; background:rgba(200,134,78,0.2);"></div>
+        <span style="font-size:0.75rem; color:var(--light-text); letter-spacing:1px;">lub</span>
+        <div style="flex:1; height:1px; background:rgba(200,134,78,0.2);"></div>
+      </div>
+
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/profile.php?id=61587573415677" target="_blank" style="
+        display:flex; align-items:center; justify-content:center; gap:12px;
+        background:#1877f2; color:#fff;
+        padding:13px 24px; border-radius:3px;
+        text-decoration:none; font-weight:700;
+        font-size:0.9rem; letter-spacing:0.5px;
+        transition:background 0.3s; margin-bottom:20px;
+      " onmouseover="this.style.background='#0d65d8'" onmouseout="this.style.background='#1877f2'">
+        <span style="font-size:1.2rem; font-weight:900; font-family:serif;">f</span>
+        Obserwuj nas na Facebooku
+      </a>
+
+      <!-- Close -->
+      <button onclick="closeWelcome()" style="
+        width:100%; background:transparent; border:none;
+        color:var(--light-text); font-size:0.8rem;
+        cursor:pointer; font-family:'Lato',sans-serif;
+        letter-spacing:0.5px; padding:4px;
+        transition:color 0.3s;
+      " onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--light-text)'">
+        Pomiń i przejdź do strony →
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);margin-bottom:12px;">Cukiernia Sękacz</p>
@@ -777,7 +879,26 @@
 </footer>
 
 <script>
-  // Map switcher
+  // Welcome popup
+  function closeWelcome() {
+    const overlay = document.getElementById('welcome-overlay');
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.4s ease';
+    setTimeout(() => overlay.style.display = 'none', 400);
+    sessionStorage.setItem('welcomeSeen', '1');
+  }
+
+  // Show popup on load (once per session)
+  window.addEventListener('load', () => {
+    if (!sessionStorage.getItem('welcomeSeen')) {
+      document.getElementById('welcome-overlay').style.display = 'flex';
+    } else {
+      document.getElementById('welcome-overlay').style.display = 'none';
+    }
+  });
+
+  // Newsletter – wysyłka przez Mailchimp (target="_blank" otwiera stronę potwierdzenia)
+
   const mapUrls = [
     "https://www.google.com/maps?q=52.2244461,21.0980301&output=embed",
     "https://www.google.com/maps?q=52.2294333,21.0679049&output=embed",
